@@ -1,114 +1,79 @@
-# React User Management Dashboard
+# User Management Dashboard
 
-A compact React.js solution for the Tacnique assignment using only **4 files**:
+A simple user management app built with React + Vite. It fetches users from a mock API and lets you view, add, edit, and delete them.
 
-```
-react-user-dashboard/
-├── package.json
-├── index.html
-└── src/
-    └── main.jsx
-```
+---
 
-## What's Included
+## Features
 
-- React + Vite setup
-- Axios API integration with JSONPlaceholder
-- View, add, edit, delete users
-- Search, sort, filter popup section
-- Pagination with 10 / 25 / 50 / 100
-- Responsive layout
-- Client-side validation
+- View all users in a table
+- Search, filter, and sort users
+- Add, edit, and delete users
+- Pagination (10 / 25 / 50 / 100 rows)
+- Form validation
+- Loading states and toast notifications
 - Error handling with retry
-- Built-in Vitest + Testing Library tests inside the same `main.jsx` file to keep file count low
 
-## Assumptions
+---
 
-JSONPlaceholder `/users` does not provide `firstName`, `lastName`, or `department`. So:
-- `name` is split into `firstName` and `lastName`
-- `department` is assigned from a rotating predefined list
-- POST/PUT/DELETE succeed as mock API calls, but persistence is handled in React state locally
+## Project Structure
 
-## Run Locally
+```
+user-management-dashboard/
+├── src/
+│   ├── App.jsx          # Main dashboard UI and logic
+│   ├── utils.js         # Helper functions (filter, sort, validate)
+│   ├── main.jsx         # App entry point
+│   └── App.test.jsx     # Unit tests
+├── .env                 # Your local environment variables (not committed)
+├── .env.example         # Template — copy this to .env to get started
+├── index.html
+└── package.json
+```
 
-### 1. Create project
+---
+
+## Getting Started
+
+### 1. Clone and install dependencies
 ```bash
 npm install
 ```
 
-### 2. Start development server
+### 2. Set up environment variables
+```bash
+# Copy the example file
+cp .env.example .env
+```
+
+The `.env` file looks like this:
+```
+VITE_API_URL=https://jsonplaceholder.typicode.com/users
+```
+
+### 3. Start the dev server
 ```bash
 npm run dev
 ```
 
-Open the URL shown in terminal, usually:
-```bash
-http://localhost:5173
-```
+Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-### 3. Production build
-```bash
-npm run build
-npm run preview
-```
+---
 
-## Run Tests
+## Notes
 
-### Run all tests once
-```bash
-npm test
-```
+- This app uses [JSONPlaceholder](https://jsonplaceholder.typicode.com/) as a free mock API
+- The API only has 10 real users (IDs 1–10). Users you add locally get IDs > 10 and are managed in client state only
+- The `name` field from the API is split into `firstName` and `lastName`
+- `department` is assigned from a rotating predefined list since the API doesn't provide one
 
-### Watch mode
-```bash
-npm run test:watch
-```
+---
 
-## What the Tests Cover
+## Available Scripts
 
-- `mapApiUsers()` correctly transforms API response
-- `validateUser()` catches empty fields and invalid emails
-- `processUsers()` correctly filters, sorts, and paginates
-- component smoke test confirms dashboard heading renders
-
-## Manual Testing Checklist
-
-### Fetch and view
-- Start app
-- Confirm users load in table
-- Confirm stats update
-
-### Add user
-- Click **Add User**
-- Submit empty form -> validation errors should appear
-- Enter valid values -> user should appear at top of list
-
-### Edit user
-- Click **Edit** on any row
-- Change one field
-- Save changes
-- Confirm updated value in table
-
-### Delete user
-- Click **Delete**
-- Confirm modal
-- User should disappear from table
-
-### Search / filter / sort
-- Search by first name or email
-- Open filters and apply department filter
-- Change sort field and order
-
-### Pagination
-- Change rows per page to 10 / 25 / 50 / 100
-- Move between pages with Previous / Next
-
-### Error handling
-- Turn off internet or block network request in devtools
-- Reload app
-- Retry button should appear in error banner
-
-## Submission Notes
-
-This version uses **React.js**, which aligns better with the preferred frontend stack in the assignment.
-Because you asked for very few files, everything is intentionally kept in `src/main.jsx` instead of splitting into many components.
+| Command | Description |
+|---|---|
+| `npm run dev` | Start development server |
+| `npm run build` | Build for production |
+| `npm run lint` | Run ESLint checks |
+| `npm run preview` | Preview the production build |

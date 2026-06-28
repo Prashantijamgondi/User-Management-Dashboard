@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { DEPARTMENTS, mapApiUsers, validateUser, processUsers } from './utils';
 
-const API_URL = import.meta.env.VITE_API_URL || 'https://jsonplaceholder.typicode.com/users';
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function App() {
   const [users, setUsers] = React.useState([]);
